@@ -1,0 +1,18 @@
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pharma
+      POSTGRES_PASSWORD: change_me
+      POSTGRES_DB: pharma_business
+    ports: ["127.0.0.1:5432:5432"]
+    volumes: ["pharma_db:/var/lib/postgresql/data"]
+  api:
+    build: .
+    restart: unless-stopped
+    env_file: .env
+    ports: ["8080:8080"]
+    depends_on: [db]
+volumes:
+  pharma_db:

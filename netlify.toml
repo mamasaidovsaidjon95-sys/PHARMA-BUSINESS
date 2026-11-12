@@ -1,0 +1,11 @@
+[build]
+  publish = "public"
+
+# Netlify serves the static website/PWA only.
+# The Express + PostgreSQL API must be hosted separately.
+# After deploying the API, replace API_BASE_URL below with its HTTPS origin.
+[[redirects]]
+  from = "/api/*"
+  to = "https://API_BASE_URL/api/:splat"
+  status = 200
+  force = true
